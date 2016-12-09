@@ -1,12 +1,9 @@
 package com.ecovacs.test.common;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStreamReader;
 
 /**
  * Created by ecosqa on 16/12/6.
- *
+ * common function
  */
 public class Common {
     private static Common common = null;
