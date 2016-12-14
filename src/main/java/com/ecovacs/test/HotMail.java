@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
  * Created by ecosqa on 16/12/5.
  *
  */
-public class HotMail {
+class HotMail {
     private static HotMail hotmail = null;
     private WebDriver driver = null;
 
@@ -16,30 +16,26 @@ public class HotMail {
 
     }
 
-    public static HotMail getInstance(){
+    static HotMail getInstance(){
         if(hotmail == null){
             hotmail = new HotMail();
         }
         return hotmail;
     }
 
-    public void init(WebDriver driver){
+    void init(WebDriver driver){
         this.driver = driver;
         //PageFactory.initElements(driver, Login.getInstance());
     }
 
-    public boolean login(){
+    boolean login(){
         Login.getInstance().init(driver);
         Login.getInstance().inputEmail(PropertyData.getProperty("hotmail_email"));
         Login.getInstance().inputPassword(PropertyData.getProperty("hotmail_pass"));
-        Login.getInstance().enterMail();
-        Login.getInstance().clickVerify();
-        Login.getInstance().showEcovacs();
-        return true;
-
+        return Login.getInstance().enterMail() && Login.getInstance().clickVerify();
     }
 
-    public boolean forgetPass(){
+    boolean forgetPass(){
         Login.getInstance().init(driver);
         Login.getInstance().inputEmail(PropertyData.getProperty("hotmail_email"));
         Login.getInstance().inputPassword(PropertyData.getProperty("hotmail_pass"));
