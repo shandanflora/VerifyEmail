@@ -108,8 +108,10 @@ public class Login {
 
     public boolean enterMail(){
         if(!loadHtml(btnNew)){
+            logger.error("Can not show email list!!!");
             return false;
         }
+        logger.info("Show email list!!!");
         /*List<WebElement> listRow = driver.findElements(By.cssSelector("._lvv2_W1>div>div>div>div>div"));
         int iSize = listRow.size();
         boolean bBreak = false;
@@ -138,8 +140,10 @@ public class Login {
 
     public boolean clickVerify(){
         if(!loadHtml(btnVerify)){
+            logger.error("Can not show first email!!!");
             return false;
         }
+        logger.info("Show first email!!!");
         winHandleBefore = driver.getWindowHandle();
         btnVerify.click();
         logger.info("click button verify!!!");
@@ -147,7 +151,12 @@ public class Login {
     }
 
     public boolean showEcovacs(){
-        return loadHtml(rowEcovacs);
+        if(!loadHtml(rowEcovacs)){
+            logger.error("Can not show Ecovacs web html!!!");
+            return false;
+        }
+        logger.info("Show Ecovacs web html!!!");
+        return true;
     }
 
     private void switchNewWin(){
@@ -169,8 +178,8 @@ public class Login {
     }
 
     public void doFindPass(){
-        editNewPass.sendKeys(PropertyData.getProperty("hotmail_pass"));
-        editReNewPass.sendKeys(PropertyData.getProperty("hotmail_pass"));
+        editNewPass.sendKeys(PropertyData.getProperty("reset_pass"));
+        editReNewPass.sendKeys(PropertyData.getProperty("reset_pass"));
         btnSave.click();
         logger.info("Click save in do find password html!!!");
     }
