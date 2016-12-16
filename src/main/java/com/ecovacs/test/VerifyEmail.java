@@ -17,7 +17,7 @@ public class VerifyEmail {
 
     public static void main(String args[]){
         //wait for 2 minutes
-        //Common.getInstance().waitSecond(2 * 60 * 1000);
+        Common.getInstance().waitSecond(2 * 60 * 1000);
         System.setProperty("webdriver.firefox.bin", "/Applications/Firefox.app/Contents/MacOS/firefox-bin");
         WebDriver webDriver = new FirefoxDriver();
         // [0:country] [1:email] [2:type]
