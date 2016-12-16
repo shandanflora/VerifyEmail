@@ -1,6 +1,7 @@
 package com.ecovacs.test;
 
 import com.ecovacs.test.activity.GmailVerify;
+import com.ecovacs.test.common.Common;
 import com.ecovacs.test.common.PropertyData;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
@@ -30,7 +31,7 @@ class Gmail {
         this.driver = driver;
     }
 
-    boolean verifyResEmail(){
+    boolean verifyResEmail(String strCountry){
         GmailVerify.getInstance().init(driver);
         GmailVerify.getInstance().inputEmail(PropertyData.getProperty("gmail_email"));
         GmailVerify.getInstance().inputPassword(PropertyData.getProperty("gmail_pass"));
@@ -44,12 +45,13 @@ class Gmail {
             logger.info("Can not show ecovacs web htmail!!!");
             return false;
         }
+        Common.getInstance().screenShot("EmailVerify-" + strCountry + ".png", driver);
         return true;
     }
 
-    boolean verifyForgetPass(){
+    boolean verifyForgetPass(String strCountry){
         GmailVerify.getInstance().init(driver);
-        GmailVerify.getInstance().inputEmail(PropertyData.getProperty("Gmail_email"));
+        GmailVerify.getInstance().inputEmail(PropertyData.getProperty("gmail_email"));
         GmailVerify.getInstance().inputPassword(PropertyData.getProperty("reset_pass"));
         if(!GmailVerify.getInstance().enterMail()){
             return false;
@@ -61,6 +63,11 @@ class Gmail {
             return false;
         }
         GmailVerify.getInstance().doFindPass();
-        return GmailVerify.getInstance().showEcovacs();
+        if(!GmailVerify.getInstance().showEcovacs()){
+            logger.info("Can not show ecovacs verify result web htmail!!!");
+            return false;
+        }
+        Common.getInstance().screenShot("EmailVerify-" + strCountry + ".png", driver);
+        return true;
     }
 }

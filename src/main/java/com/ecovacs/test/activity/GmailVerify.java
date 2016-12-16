@@ -63,16 +63,29 @@ public class GmailVerify {
             logger.info("Show sign in web html!!!!");
             gmail_editEmail.sendKeys(strEmail);
             logger.info("Fill e-mail!!!");
+            winHandleBefore = driver.getWindowHandle();
+            logger.info(winHandleBefore);
             gmail_btnNext.click();
             logger.info("Click next!!!!");
         }
 
-        public void inputPassword(String strPass){
-            Common.getInstance().loadHtml(gmail_btnSignIn);
+        public boolean inputPassword(String strPass){
+            if(!Common.getInstance().loadHtml(gmail_editPassword)){
+                logger.error("Can not show input password html!!!");
+                return false;
+            }
+            logger.info("Show input password html!!!");
+            logger.info(String.valueOf(driver.getWindowHandles().size()));
+            for(String str:driver.getWindowHandles()){
+                logger.info(str);
+            }
+            logger.info(driver.getCurrentUrl());
+            driver.switchTo().window(driver.getWindowHandle());
             gmail_editPassword.sendKeys(strPass);
             logger.info("Filled password!!!!");
             gmail_btnSignIn.click();
             logger.info("Clicked sign in!!!!");
+            return true;
         }
 
         public boolean enterMail(){
