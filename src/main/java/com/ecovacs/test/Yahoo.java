@@ -54,7 +54,7 @@ class Yahoo {
     boolean verifyForgetPass(String strCountry){
         YahooVerify.getInstance().init(driver);
         YahooVerify.getInstance().inputEmail(PropertyData.getProperty("yahoo_email"));
-        YahooVerify.getInstance().inputPassword(PropertyData.getProperty("reset_pass"));
+        YahooVerify.getInstance().inputPassword(PropertyData.getProperty("yahoo_pass"));
         if(!YahooVerify.getInstance().enterMail()){
             return false;
         }
