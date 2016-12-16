@@ -34,12 +34,7 @@ public class YahooVerify {
     @FindBy(xpath = "html/body/div[1]")
     private WebElement rowEcovacs = null;
 
-    @FindBy(xpath = "html/body/div[9]/div[3]/div[4]/div[2]/div[1]/div[2]/div")
-    private WebElement rowToolBar = null;
     @FindBy(xpath = "html/body/div[9]/div[3]/div[4]/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div/div[2]/div[1]")
-    //               html/body/div[9]/div[3]/div[4]/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div/div[2]/div[1]/div[1]/div
-
-    //               html/body/div[9]/div[3]/div[4]/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div/div[2]/div[1]
     private WebElement firstRowReci = null;
     @FindBy(xpath = "html/body/form/div[2]/div[1]/input")
     private WebElement editNewPass = null;
