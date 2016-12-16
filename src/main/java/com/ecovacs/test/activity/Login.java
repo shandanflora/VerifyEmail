@@ -150,11 +150,13 @@ public class Login {
         return true;
     }
 
-    public boolean showEcovacs(){
+    public boolean showEcovacs(String strCountry){
         if(!loadHtml(rowEcovacs)){
+            Common.getInstance().screenShot("EmailVerify-" + strCountry + ".png", driver);
             logger.error("Can not show Ecovacs web html!!!");
             return false;
         }
+        Common.getInstance().screenShot("EmailVerify-" + strCountry + ".png", driver);
         logger.info("Show Ecovacs web html!!!");
         return true;
     }
