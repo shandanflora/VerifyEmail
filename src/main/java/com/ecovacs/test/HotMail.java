@@ -28,14 +28,14 @@ class HotMail {
         //PageFactory.initElements(driver, Login.getInstance());
     }
 
-    boolean login(){
+    boolean login(String strCountry){
         Login.getInstance().init(driver);
         Login.getInstance().inputEmail(PropertyData.getProperty("hotmail_email"));
         Login.getInstance().inputPassword(PropertyData.getProperty("hotmail_pass"));
-        return Login.getInstance().enterMail() && Login.getInstance().clickVerify();
+        return Login.getInstance().enterMail() && Login.getInstance().clickVerify() && Login.getInstance().showEcovacs(strCountry);
     }
 
-    boolean forgetPass(){
+    boolean forgetPass(String strCountry){
         Login.getInstance().init(driver);
         Login.getInstance().inputEmail(PropertyData.getProperty("hotmail_email"));
         Login.getInstance().inputPassword(PropertyData.getProperty("hotmail_pass"));
@@ -49,6 +49,6 @@ class HotMail {
             return false;
         }
         Login.getInstance().doFindPass();
-        return Login.getInstance().showEcovacs();
+        return Login.getInstance().showEcovacs(strCountry);
     }
 }
