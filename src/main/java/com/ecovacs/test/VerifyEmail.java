@@ -40,7 +40,7 @@ public class VerifyEmail {
                 }
             }
         }else if(args[1].equals("gmail")){
-            strUrl = PropertyData.getProperty("gmailURL");
+            strUrl = Gmail.getInstance().getEcovacsActiveUrl();
             webDriver.navigate().to(strUrl);
             if(args[2].equals("Register")){
                 Gmail.getInstance().init(webDriver);
@@ -69,5 +69,6 @@ public class VerifyEmail {
             }
         }
         webDriver.quit();
+        logger.info("Close all windows!!!");
     }
 }

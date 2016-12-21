@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 public class GmailVerify {
         private static GmailVerify gmailVerify = null;
         private static Logger logger = LoggerFactory.getLogger(GmailVerify.class);
-        private WebDriver driver = null;
+        /*private WebDriver driver = null;
         private String winHandleBefore = null;
 
         @FindBy(xpath = "html/body/div[1]/div[2]/div[2]/div[1]/form/div[1]/div/div[1]/div/div/input[1]")
@@ -31,16 +31,17 @@ public class GmailVerify {
         private WebElement gmail_btnWrite = null;
         @FindBy(xpath = "html/body/div[7]/div[3]/div/div[2]/div[1]/div[2]/div/div/div/div/div[2]/div[1]/div[1]/div/div[2]/div/table/tr/td[1]/div[2]/div[2]/div/div[3]/div/div/div/div/div/div[1]/div[2]/div[7]/div/div[1]/table[1]/tbody/tr[4]/td/span/span/a")
         private WebElement gmail_btnVerify = null;
+        @FindBy(xpath = "html/body/div[7]/div[3]/div/div[2]/div[1]/div[2]/div/div/div/div/div[2]/div[1]/div[1]/div/div/div[7]/div/div[1]/div[2]/div/table/tbody/tr/td[4]/div[2]")
+        private WebElement firstRowReci = null;*/
         @FindBy(xpath = "html/body/div[1]")
         private WebElement rowEcovacs = null;
 
-        @FindBy(xpath = "html/body/div[7]/div[3]/div/div[2]/div[1]/div[2]/div/div/div/div/div[2]/div[1]/div[1]/div/div/div[7]/div/div[1]/div[2]/div/table/tbody/tr/td[4]/div[2]")
-        private WebElement firstRowReci = null;
+
         @FindBy(xpath = "html/body/form/div[2]/div[1]/input")
         private WebElement editNewPass = null;
         @FindBy(xpath = "html/body/form/div[2]/div[2]/input")
         private WebElement editReNewPass = null;
-        @FindBy(xpath = "html/body/form/div[4]")
+        @FindBy(xpath = "html/body/form/div[4]")//html/body/form/div[4]/button
         private WebElement btnSave = null;
 
         private GmailVerify(){
@@ -56,10 +57,10 @@ public class GmailVerify {
 
         public void init(WebDriver driver){
             PageFactory.initElements(driver, this);
-            this.driver = driver;
+            //this.driver = driver;
         }
 
-        public void inputEmail(String strEmail){
+        /*public void inputEmail(String strEmail){
             logger.info("Show sign in web html!!!!");
             gmail_editEmail.sendKeys(strEmail);
             logger.info("Fill e-mail!!!");
@@ -107,24 +108,25 @@ public class GmailVerify {
             gmail_btnVerify.click();
             logger.info("Click button verify and continue!!!");
             return true;
-        }
+        }*/
 
         public boolean showEcovacs(){
             return Common.getInstance().loadHtml(rowEcovacs);
         }
+
         //forget password
-        private void switchNewWin(){
+        /*private void switchNewWin(){
             for(String winHandle : driver.getWindowHandles()){
                 if(winHandle.equals(winHandleBefore)){
                     continue;
                 }
                 driver.switchTo().window(winHandle);
             }
-        }
+        }*/
 
         public boolean showDoFindPass(){
-            switchNewWin();
-            if(!Common.getInstance().loadHtml(btnSave)){
+            //switchNewWin();
+            if(!Common.getInstance().loadHtml(editNewPass)){
                 logger.error("Can not show do find password html!!!");
                 return false;
             }
