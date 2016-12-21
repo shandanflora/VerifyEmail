@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by ecosqa on 16/12/6.
@@ -42,16 +43,35 @@ public class Common {
                 break;
             }
             try {
-                webElement.getText();
+                webElement.isDisplayed();
                 bResult = true;
                 break;
-            }catch (NoSuchElementException e){
+            }catch (Exception e){
                 logger.info("load web html again-" + String.valueOf(iLoop));
+                e.printStackTrace();
                 Common.getInstance().waitSecond(500);
             }
             iLoop++;
         }
         return bResult;
+    }
+
+    private boolean deleteDir(File dir) {
+        if (dir.isDirectory()) {
+            String[] children = dir.list();
+            if(children == null){
+                return false;
+            }
+            //recursion delete subfolder
+            for(String strFile:children) {
+                boolean success = deleteDir(new File(dir, strFile));
+                if (!success) {
+                    return false;
+                }
+            }
+        }
+        //delete empty folder or file
+        return dir.delete();
     }
 
     private boolean delAllFile(String path) {
@@ -78,8 +98,16 @@ public class Common {
 
     public boolean screenShot(String strFileName, WebDriver driver){
         TakesScreenshot screen = (TakesScreenshot ) new Augmenter().augment(driver);
-        String strPath = getClass().getResource("/").getPath()
-                + "../" + "screenShots/";
+        File directory = new File("");//set current path
+        /*String strPath = getClass().getResource("/").getPath()
+                + "../" + "screenShots/";*/
+        String strPath = "";
+        try{
+            System.out.println(directory.getCanonicalPath());//get path
+            strPath = directory.getCanonicalPath() + "/report/screenShots/";
+        }catch(IOException e){
+            System.out.println(e);
+        }
         //check
         File folder = new File(strPath);
         if(!folder.exists() && !folder.isDirectory()){
@@ -90,6 +118,9 @@ public class Common {
             delAllFile(strPath);
         }
         File ss = new File(strPath + strFileName);
+        logger.info("strPath-" + strPath);
+        logger.info("strFileName-" + strFileName);
+        logger.info(ss.getPath() + "-- " + ss.getName());
         return screen.getScreenshotAs(OutputType.FILE).renameTo(ss);
     }
 
