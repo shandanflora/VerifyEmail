@@ -47,7 +47,7 @@ class Yahoo {
             return false;
         }
         logger.info("Show ecovacs web htmail!!!");
-        Common.getInstance().screenShot("EmailVerify-" + strCountry + ".png", driver);
+        Common.getInstance().screenShot("Register-" + strCountry + ".png", driver);
         return true;
     }
 
@@ -66,10 +66,11 @@ class Yahoo {
         }
         YahooVerify.getInstance().doFindPass();
         if(!YahooVerify.getInstance().showEcovacs()){
-            logger.info("Can not show ecovacs web htmail!!!");
+            logger.info("Can not show ecovacs web html!!!");
             return false;
         }
-        Common.getInstance().screenShot("EmailVerify-" + strCountry + ".png", driver);
+        logger.info("Show ecovacs doResetPass html!!!");
+        Common.getInstance().screenShot("doResetPass-" + strCountry + ".png", driver);
         return true;
     }
 }
