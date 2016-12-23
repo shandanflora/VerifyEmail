@@ -8,6 +8,10 @@
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path=".idea/dataSources.local.xml" />
+    <ignored path="logs/debug.log" />
+    <ignored path="logs/error.20161223.log" />
+    <ignored path="logs/info.20161223.log" />
+    <ignored mask="*.log" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -701,7 +705,7 @@
       <workItem from="1482280733283" duration="11924000" />
       <workItem from="1482367013041" duration="579000" />
       <workItem from="1482376950280" duration="279000" />
-      <workItem from="1482460805181" duration="5923000" />
+      <workItem from="1482460805181" duration="5968000" />
     </task>
     <task id="LOCAL-00001" summary="commit for adding comment">
       <created>1481267929795</created>
@@ -899,11 +903,18 @@
       <option name="project" value="LOCAL" />
       <updated>1482474681176</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="commit for project file">
+      <created>1482474689267</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1482474689267</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104042000" />
+    <option name="totallyTimeSpent" value="104087000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="6" y="23" width="1440" height="806" extended-state="0" />
