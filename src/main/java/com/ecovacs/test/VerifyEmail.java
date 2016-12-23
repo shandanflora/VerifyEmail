@@ -26,13 +26,12 @@ public class VerifyEmail {
         logger.info("--------" + args[2] + "--------");
         String strUrl;
         if(args[1].equals("hotmail")){
-            strUrl = PropertyData.getProperty("hotmailURL");
+            strUrl = HotMail.getInstance().getEcovacsActiveUrl();
             webDriver.navigate().to(strUrl);
+            HotMail.getInstance().init(webDriver);
             if(args[2].equals("Register")){
-                HotMail.getInstance().init(webDriver);
                 HotMail.getInstance().login(args[0]);
             }else if(args[2].equals("DoFindPass")){
-                HotMail.getInstance().init(webDriver);
                 if(!HotMail.getInstance().forgetPass(args[0])){
                     logger.error("Do find password failed!!!");
                 }else {

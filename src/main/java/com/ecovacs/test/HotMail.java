@@ -1,6 +1,7 @@
 package com.ecovacs.test;
 
 import com.ecovacs.test.activity.Login;
+import com.ecovacs.test.common.Common;
 import com.ecovacs.test.common.PropertyData;
 import org.openqa.selenium.WebDriver;
 
@@ -25,26 +26,33 @@ class HotMail {
 
     void init(WebDriver driver){
         this.driver = driver;
-        //PageFactory.initElements(driver, Login.getInstance());
     }
 
     boolean login(String strCountry){
         Login.getInstance().init(driver);
-        Login.getInstance().inputEmail(PropertyData.getProperty("hotmail_email"));
-        Login.getInstance().inputPassword(PropertyData.getProperty("hotmail_pass"));
-        return Login.getInstance().enterMail() && Login.getInstance().clickVerify() && Login.getInstance().showEcovacs(strCountry);
+        /*Login.getInstance().inputEmail(PropertyData.getProperty("hotmail_email"));
+        Login.getInstance().inputPassword(PropertyData.getProperty("hotmail_pass"));*/
+        return /*Login.getInstance().enterMail() && Login.getInstance().clickVerify() &&*/ Login.getInstance().showEcovacs(strCountry);
+    }
+
+    String getEcovacsActiveUrl(){
+        return Common.getInstance().getEcovacsActiveUrl(
+                PropertyData.getProperty("hotmail_imapHost"),
+                PropertyData.getProperty("hotmail_email"),
+                PropertyData.getProperty("hotmail_pass"));
+
     }
 
     boolean forgetPass(String strCountry){
         Login.getInstance().init(driver);
-        Login.getInstance().inputEmail(PropertyData.getProperty("hotmail_email"));
+        /*Login.getInstance().inputEmail(PropertyData.getProperty("hotmail_email"));
         Login.getInstance().inputPassword(PropertyData.getProperty("hotmail_pass"));
         if(!Login.getInstance().enterMail()){
             return false;
         }
         if(!Login.getInstance().clickVerify()){
             return false;
-        }
+        }*/
         if(!Login.getInstance().showDoFindPass()){
             return false;
         }

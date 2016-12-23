@@ -18,9 +18,9 @@ public class Login {
     private static Login login = null;
     private static Logger logger = LoggerFactory.getLogger(Login.class);
     private WebDriver driver = null;
-    private String winHandleBefore = null;
+    //private String winHandleBefore = null;
 
-    @FindBy(css = "#i0116")
+    /*@FindBy(css = "#i0116")
     private WebElement editEmail = null;
     @FindBy(css = "#idSIButton9")
     private WebElement btnNext = null;
@@ -34,11 +34,12 @@ public class Login {
     private WebElement btnNew = null;
     @FindBy(xpath = "html/body/div[2]/div/div[3]/div[5]/div/div[1]/div/div[5]/div/div[4]/div[1]/div/div/div[3]/div[2]/div[2]/div[5]/div[1]/div/div/div[1]/div[1]/div[3]/div[4]/div[3]/div[2]/div/div/div/div/table[1]/tbody/tr[4]/td/span/span/a")
     private WebElement btnVerify = null;
+    @FindBy(xpath = "html/body/div[2]/div/div[3]/div[5]/div/div[1]/div/div[5]/div/div[1]/div/div/div/div[4]/div[3]/div[1]/div[3]/div[1]/div/div/div[2]/div[1]/div[2]/div[4]/div[3]/div")
+    private WebElement firstRowReci = null;*/
+
     @FindBy(xpath = "html/body/div[1]")
     private WebElement rowEcovacs = null;
 
-    @FindBy(xpath = "html/body/div[2]/div/div[3]/div[5]/div/div[1]/div/div[5]/div/div[1]/div/div/div/div[4]/div[3]/div[1]/div[3]/div[1]/div/div/div[2]/div[1]/div[2]/div[4]/div[3]/div")
-    private WebElement firstRowReci = null;
     @FindBy(xpath = "html/body/form/div[2]/div[1]/input")
     private WebElement editNewPass = null;
     @FindBy(xpath = "html/body/form/div[2]/div[2]/input")
@@ -62,13 +63,13 @@ public class Login {
         this.driver = driver;
     }
 
-    public void inputEmail(String strEmail){
+    /*public void inputEmail(String strEmail){
         logger.info("show login html!!!!");
         editEmail.sendKeys(strEmail);
         logger.info("input e-mail!!!!");
         btnNext.click();
         logger.info("click next!!!!");
-    }
+    }*/
 
     private boolean loadHtml(WebElement webElement){
 
@@ -97,7 +98,7 @@ public class Login {
         }
         return bResult;
     }
-
+    /*
     public void inputPassword(String strPass){
         loadHtml(checkKeep);
         editPassword.sendKeys(strPass);
@@ -112,28 +113,6 @@ public class Login {
             return false;
         }
         logger.info("Show email list!!!");
-        /*List<WebElement> listRow = driver.findElements(By.cssSelector("._lvv2_W1>div>div>div>div>div"));
-        int iSize = listRow.size();
-        boolean bBreak = false;
-        logger.info("size: " + String.valueOf(iSize));
-        for(int i = 0; i < iSize; i++){
-            //logger.info("loop1 i: " + String.valueOf(i));
-            List<WebElement> listMail = listRow.get(i).findElements(By.className("_lvv2_c1"));
-            logger.info("size list1: " + String.valueOf(listMail.size()));
-            int iSize1 = listMail.size();
-            for (int j = 0; j < iSize1; j++){
-                //logger.info("loop2 j: " + String.valueOf(j));
-                logger.info("content text: " + listMail.get(j).getText());
-                if(listMail.get(j).getText().equals("feedback@support.ecovacs.com")){
-                    listMail.get(j).click();
-                    bBreak = true;
-                    break;
-                }
-            }
-            if (bBreak){
-                break;
-            }
-        }*/
         firstRowReci.click();
         return true;
     }
@@ -148,7 +127,7 @@ public class Login {
         btnVerify.click();
         logger.info("click button verify!!!");
         return true;
-    }
+    }*/
 
     public boolean showEcovacs(String strCountry){
         if(!loadHtml(rowEcovacs)){
@@ -161,21 +140,22 @@ public class Login {
         return true;
     }
 
-    private void switchNewWin(){
+    /*private void switchNewWin(){
         for(String winHandle : driver.getWindowHandles()){
             if(winHandle.equals(winHandleBefore)){
                 continue;
             }
             driver.switchTo().window(winHandle);
         }
-    }
+    }*/
 
     public boolean showDoFindPass(){
-        switchNewWin();
+        //switchNewWin();
         if(!loadHtml(btnSave)){
             logger.error("Can not show do find password html!!!");
             return false;
         }
+        logger.info("Show do find password html!!!");
         return true;
     }
 
