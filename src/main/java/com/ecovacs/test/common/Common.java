@@ -5,8 +5,14 @@ import org.openqa.selenium.remote.Augmenter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.mail.Folder;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Store;
+import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Properties;
 
 /**
  * Created by ecosqa on 16/12/6.
@@ -56,7 +62,7 @@ public class Common {
         return bResult;
     }
 
-    private boolean deleteDir(File dir) {
+    /*private boolean deleteDir(File dir) {
         if (dir.isDirectory()) {
             String[] children = dir.list();
             if(children == null){
@@ -72,7 +78,7 @@ public class Common {
         }
         //delete empty folder or file
         return dir.delete();
-    }
+    }*/
 
     private boolean delAllFile(String path) {
         File file = new File(path);
@@ -106,7 +112,7 @@ public class Common {
             System.out.println(directory.getCanonicalPath());//get path
             strPath = directory.getCanonicalPath() + "/report/screenShots/";
         }catch(IOException e){
-            System.out.println(e);
+            e.printStackTrace();
         }
         //check
         File folder = new File(strPath);
@@ -122,6 +128,36 @@ public class Common {
         logger.info("strFileName-" + strFileName);
         logger.info(ss.getPath() + "-- " + ss.getName());
         return screen.getScreenshotAs(OutputType.FILE).renameTo(ss);
+    }
+
+    public String getEcovacsActiveUrl(String strImapHost, String strEmail, String strPassword){
+        String strUrl = null;
+        // Setup mail server
+        Properties properties = new Properties();
+        Session session = Session.getDefaultInstance(properties, null);
+        session.setDebug(true);
+
+        try {
+            Store store = session.getStore("imaps");
+            store.connect(strImapHost, strEmail, strPassword);
+            Folder folder = store.getFolder("INBOX");
+            folder.open(Folder.READ_ONLY);
+
+            Message message[] = folder.getMessages();
+            System.out.println("Messages's length: " + message.length);
+            ReceiveMailUtil recMailUtil;
+            recMailUtil = new ReceiveMailUtil((MimeMessage)message[message.length - 1]);
+            if(recMailUtil.getFrom().contains(PropertyData.getProperty("ecovacs_mail"))) {
+                recMailUtil.getMailContent(message[message.length - 1]);
+                int iBegin = recMailUtil.getBodyText().indexOf("href=") + 6;
+                int iEnd = recMailUtil.getBodyText().indexOf("\"", recMailUtil.getBodyText().indexOf("href") + 6);
+                strUrl = recMailUtil.getBodyText().substring(iBegin, iEnd);
+                System.out.println("Message " + message.length + " " + strUrl);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return strUrl;
     }
 
 }
