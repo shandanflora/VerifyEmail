@@ -77,35 +77,9 @@ class Gmail {
     }
 
     String getEcovacsActiveUrl(){
-        String strUrl = null;
-        // Setup mail server
-        Properties properties = new Properties();
-        Session session = Session.getDefaultInstance(properties, null);
-        session.setDebug(true);
-
-        try {
-            Store store = session.getStore("imaps");
-            store.connect(PropertyData.getProperty("gmail_popHost"),
-                          PropertyData.getProperty("gmail_email"),
-                          PropertyData.getProperty("gmail_pass"));
-            Folder folder = store.getFolder("INBOX");
-            folder.open(Folder.READ_ONLY);
-
-            Message message[] = folder.getMessages();
-            System.out.println("Messages's length: " + message.length);
-            ReceiveMailUtil recMailUtil;
-            recMailUtil = new ReceiveMailUtil((MimeMessage)message[message.length - 1]);
-            if(recMailUtil.getFrom().contains(PropertyData.getProperty("ecovacs_mail"))) {
-                recMailUtil.getMailContent(message[message.length - 1]);
-                System.out.println("****************************************");
-                int iBegin = recMailUtil.getBodyText().indexOf("href=") + 6;
-                int iEnd = recMailUtil.getBodyText().indexOf("\"", recMailUtil.getBodyText().indexOf("href") + 6);
-                strUrl = recMailUtil.getBodyText().substring(iBegin, iEnd);
-                System.out.println("Message " + message.length + " " + strUrl);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return strUrl;
+        return Common.getInstance().getEcovacsActiveUrl(
+                PropertyData.getProperty("gmail_popHost"),
+                PropertyData.getProperty("gmail_email"),
+                PropertyData.getProperty("gmail_pass"));
     }
 }
