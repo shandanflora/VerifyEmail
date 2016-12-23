@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b95bf32e-e15d-4203-b037-da7376d93d78" name="Default" comment="commit for adding gmail">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+    <list default="true" id="b95bf32e-e15d-4203-b037-da7376d93d78" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="VerifyResEmail.iws" />
@@ -702,7 +701,7 @@
       <workItem from="1482280733283" duration="11924000" />
       <workItem from="1482367013041" duration="579000" />
       <workItem from="1482376950280" duration="279000" />
-      <workItem from="1482460805181" duration="5906000" />
+      <workItem from="1482460805181" duration="5923000" />
     </task>
     <task id="LOCAL-00001" summary="commit for adding comment">
       <created>1481267929795</created>
@@ -893,11 +892,18 @@
       <option name="project" value="LOCAL" />
       <updated>1482474660042</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="commit for project file">
+      <created>1482474681176</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1482474681176</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104025000" />
+    <option name="totallyTimeSpent" value="104042000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="6" y="23" width="1440" height="806" extended-state="0" />
@@ -1010,7 +1016,8 @@
     <MESSAGE value="commit for simulate web html to email imap" />
     <MESSAGE value="commit for refactor code" />
     <MESSAGE value="commit for warning information" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit for warning information" />
+    <MESSAGE value="commit for project file" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit for project file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
