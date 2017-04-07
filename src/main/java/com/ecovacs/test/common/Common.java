@@ -12,6 +12,10 @@ import javax.mail.Store;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 
 /**
@@ -78,7 +82,7 @@ public class Common {
         }
         //delete empty folder or file
         return dir.delete();
-    }*/
+    }
 
     private boolean delAllFile(String path) {
         File file = new File(path);
@@ -100,7 +104,7 @@ public class Common {
             }
         }
         return true;
-    }
+    }*/
 
     public boolean screenShot(String strFileName, WebDriver driver){
         TakesScreenshot screen = (TakesScreenshot ) new Augmenter().augment(driver);
@@ -120,14 +124,47 @@ public class Common {
             if(!folder.mkdir()){
                 return false;
             }
-        }else {
-            delAllFile(strPath);
+        }
+        if(strFileName.contains(" ")){
+            logger.info(strFileName);
+            strFileName = strFileName.replaceAll(" ", "_");
+            logger.info(strFileName);
         }
         File ss = new File(strPath + strFileName);
         logger.info("strPath-" + strPath);
         logger.info("strFileName-" + strFileName);
         logger.info(ss.getPath() + "-- " + ss.getName());
         return screen.getScreenshotAs(OutputType.FILE).renameTo(ss);
+    }
+
+    private int getEmailIndex(Message message[]){
+        int iIndex = 0;
+        ReceiveMailUtil recMailUtil;
+        DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd HH:mm");
+        Date dateTimePre = null;
+        Date dateTimeCur;
+        try {
+            for (int i = 0; i < message.length; i++){
+                recMailUtil = new ReceiveMailUtil((MimeMessage)message[i]);
+                if(recMailUtil.getFrom().contains(PropertyData.getProperty("ecovacs_mail"))) {
+                    if (dateTimePre == null){
+                        dateTimePre = dateFormat.parse(recMailUtil.getSentDate());
+                        continue;
+                    }
+                    dateTimeCur = dateFormat.parse(recMailUtil.getSentDate());
+                    int iResult = dateTimeCur.compareTo(dateTimePre);
+                    if (iResult > 0){
+                        dateTimePre = dateTimeCur;
+                        iIndex = i;
+                    }
+                }
+            }
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+
+
+        return iIndex;
     }
 
     public String getEcovacsActiveUrl(String strImapHost, String strEmail, String strPassword){
@@ -145,15 +182,14 @@ public class Common {
 
             Message message[] = folder.getMessages();
             System.out.println("Messages's length: " + message.length);
-            ReceiveMailUtil recMailUtil;
-            recMailUtil = new ReceiveMailUtil((MimeMessage)message[message.length - 1]);
-            if(recMailUtil.getFrom().contains(PropertyData.getProperty("ecovacs_mail"))) {
-                recMailUtil.getMailContent(message[message.length - 1]);
-                int iBegin = recMailUtil.getBodyText().indexOf("href=") + 6;
-                int iEnd = recMailUtil.getBodyText().indexOf("\"", recMailUtil.getBodyText().indexOf("href") + 6);
-                strUrl = recMailUtil.getBodyText().substring(iBegin, iEnd);
-                System.out.println("Message " + message.length + " " + strUrl);
-            }
+            int iIndex = getEmailIndex(message);
+            ReceiveMailUtil recMailUtil = new ReceiveMailUtil((MimeMessage)message[iIndex]);
+            recMailUtil.getMailContent(message[iIndex]);
+            int iBegin = recMailUtil.getBodyText().indexOf("href=") + 6;
+            int iEnd = recMailUtil.getBodyText().indexOf("\"", recMailUtil.getBodyText().indexOf("href") + 6);
+            strUrl = recMailUtil.getBodyText().substring(iBegin, iEnd);
+            System.out.println("Message " + message.length + " " + strUrl);
+
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -3,9 +3,9 @@ package com.ecovacs.test.common;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-/*import javax.mail.internet.MimeUtility;
+/*import javax.mail.internet.MimeUtility;*/
 import java.text.SimpleDateFormat;
-import java.util.Date;*/
+import java.util.Date;
 
 /**
  * Created by ecosqa on 16/12/20.
@@ -17,13 +17,13 @@ public class ReceiveMailUtil {
         //private String saveAttachPath="";//附件下载后的存放目录
         private StringBuffer bodytext= new StringBuffer();
         //存放邮件内容的StringBuffer对象
-        //private String dateformat="yy-MM-dd HH:mm";
+        private String dateformat="yy-MM-dd HH:mm";
 
 
         /**
          * 构造函数,初始化一个MimeMessage对象
          */
-        public ReceiveMailUtil(MimeMessage mimeMessage){
+        ReceiveMailUtil(MimeMessage mimeMessage){
             this.mimeMessage = mimeMessage;
             System.out.println("create a ParseMimeMessage object........");
         }
@@ -37,7 +37,7 @@ public class ReceiveMailUtil {
         /**
          * 获得发件人的地址和姓名
          */
-        public String  getFrom(){
+        String  getFrom(){
             String fromAddr = null;
             try {
                 InternetAddress address[] = (InternetAddress[])mimeMessage.getFrom();
@@ -101,7 +101,7 @@ public class ReceiveMailUtil {
         }*/
 
 
-        /*public String getSentDate(){
+        String getSentDate(){
             Date sentDate = null;
             try {
                 sentDate = mimeMessage.getSentDate();
@@ -111,14 +111,14 @@ public class ReceiveMailUtil {
             }
             SimpleDateFormat format = new SimpleDateFormat(dateformat);
             return format.format(sentDate);
-        }*/
+        }
 
     /**
      * get mail content
      * @return String
      */
 
-    public String getBodyText(){
+    String getBodyText(){
             return bodytext.toString();
         }
 
@@ -128,7 +128,7 @@ public class ReceiveMailUtil {
          * 主要是根据MimeType类型的不同执行不同的操作，一步一步的解析
          */
 
-        public void getMailContent(Part part){
+        void getMailContent(Part part){
             try {
                 String contenttype = part.getContentType();
                 int nameindex = contenttype.indexOf("name");
@@ -238,8 +238,8 @@ public class ReceiveMailUtil {
         }*/
 
 
-/*
-        public void setDateFormat(String format)throws Exception{
+
+        /*public void setDateFormat(String format)throws Exception{
             this.dateformat = format;
         }*/
 
