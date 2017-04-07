@@ -50,7 +50,7 @@ class Gmail {
             logger.info("Can not show ecovacs web htmail!!!");
             return false;
         }
-        Common.getInstance().screenShot("EmailVerify-" + strCountry + ".png", driver);
+        Common.getInstance().screenShot("Register-" + strCountry + ".png", driver);
         return true;
     }
 
@@ -72,7 +72,7 @@ class Gmail {
             logger.info("Can not show ecovacs verify result web htmail!!!");
             return false;
         }
-        Common.getInstance().screenShot("EmailVerify-" + strCountry + ".png", driver);
+        Common.getInstance().screenShot("doResetPass-" + strCountry + ".png", driver);
         return true;
     }
 
