@@ -162,8 +162,6 @@ public class Common {
         }catch (ParseException e){
             e.printStackTrace();
         }
-
-
         return iIndex;
     }
 
@@ -181,14 +179,14 @@ public class Common {
             folder.open(Folder.READ_ONLY);
 
             Message message[] = folder.getMessages();
-            System.out.println("Messages's length: " + message.length);
+            logger.info("Messages's length: " + message.length);
             int iIndex = getEmailIndex(message);
             ReceiveMailUtil recMailUtil = new ReceiveMailUtil((MimeMessage)message[iIndex]);
             recMailUtil.getMailContent(message[iIndex]);
             int iBegin = recMailUtil.getBodyText().indexOf("href=") + 6;
             int iEnd = recMailUtil.getBodyText().indexOf("\"", recMailUtil.getBodyText().indexOf("href") + 6);
             strUrl = recMailUtil.getBodyText().substring(iBegin, iEnd);
-            System.out.println("Message " + message.length + " " + strUrl);
+            logger.info("Message " + message.length + " " + strUrl);
 
         }catch (Exception e){
             e.printStackTrace();
