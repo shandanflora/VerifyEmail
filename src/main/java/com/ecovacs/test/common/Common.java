@@ -1,5 +1,8 @@
 package com.ecovacs.test.common;
 
+import com.google.common.collect.Maps;
+import com.sun.mail.imap.IMAPFolder;
+import com.sun.mail.imap.IMAPStore;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.Augmenter;
 import org.slf4j.Logger;
@@ -16,6 +19,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -171,9 +176,20 @@ public class Common {
         Properties properties = new Properties();
         Session session = Session.getDefaultInstance(properties, null);
         session.setDebug(true);
-
         try {
+            /*Map idMap = new HashMap();
+            idMap.put("name", "xxx");
+            idMap.put("version", "7.26");
+            idMap.put("os", "windows");
+            idMap.put("os-version", "6.1");
+            idMap.put("vendor", "xxx");
+            idMap.put("contact", "xxx@xxx.com");
+
             Store store = session.getStore("imaps");
+            IMAPStore imapStore = (IMAPStore) store;
+            Map res = imapStore.id(idMap);*/
+            Store store = session.getStore("imaps");
+            //Store store = session.getStore("pop3");
             store.connect(strImapHost, strEmail, strPassword);
             Folder folder = store.getFolder("INBOX");
             folder.open(Folder.READ_ONLY);

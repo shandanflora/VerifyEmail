@@ -3,14 +3,14 @@ package com.ecovacs.test;
 import com.ecovacs.test.activity.GmailVerify;
 import com.ecovacs.test.common.Common;
 import com.ecovacs.test.common.PropertyData;
-import com.ecovacs.test.common.ReceiveMailUtil;
+//import com.ecovacs.test.common.ReceiveMailUtil;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.mail.*;
+/*import javax.mail.*;
 import javax.mail.internet.MimeMessage;
-import java.util.Properties;
+import java.util.Properties;*/
 
 /**
  * Created by ecosqa on 16/12/14.
@@ -79,6 +79,7 @@ class Gmail {
     String getEcovacsActiveUrl(){
         return Common.getInstance().getEcovacsActiveUrl(
                 PropertyData.getProperty("gmail_popHost"),
+                993,
                 PropertyData.getProperty("gmail_email"),
                 PropertyData.getProperty("gmail_pass"));
     }

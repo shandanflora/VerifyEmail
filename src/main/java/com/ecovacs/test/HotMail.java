@@ -38,6 +38,7 @@ class HotMail {
     String getEcovacsActiveUrl(){
         return Common.getInstance().getEcovacsActiveUrl(
                 PropertyData.getProperty("hotmail_imapHost"),
+                993,
                 PropertyData.getProperty("hotmail_email"),
                 PropertyData.getProperty("hotmail_pass"));
 
