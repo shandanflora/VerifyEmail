@@ -1,6 +1,6 @@
-package com.ecovacs.test.common;
+package com.ecovacs.email.common;
 
-import com.ecovacs.test.activity.GmailVerify;
+import com.ecovacs.email.activity.GmailVerify;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

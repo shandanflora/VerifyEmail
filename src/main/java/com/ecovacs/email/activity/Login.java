@@ -1,7 +1,7 @@
-package com.ecovacs.test.activity;
+package com.ecovacs.email.activity;
 
-import com.ecovacs.test.common.Common;
-import com.ecovacs.test.common.PropertyData;
+import com.ecovacs.email.common.Common;
+import com.ecovacs.email.common.PropertyData;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

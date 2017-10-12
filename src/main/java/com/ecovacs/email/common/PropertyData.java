@@ -1,4 +1,4 @@
-package com.ecovacs.test.common;
+package com.ecovacs.email.common;
 
 import java.io.IOException;
 import java.io.InputStreamReader;

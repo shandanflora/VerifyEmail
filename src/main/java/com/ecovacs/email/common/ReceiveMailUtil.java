@@ -1,4 +1,4 @@
-package com.ecovacs.test.common;
+package com.ecovacs.email.common;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -17,7 +17,7 @@ public class ReceiveMailUtil {
         //private String saveAttachPath="";//附件下载后的存放目录
         private StringBuffer bodytext= new StringBuffer();
         //存放邮件内容的StringBuffer对象
-        private String dateformat="yy-MM-dd HH:mm";
+        private String dateformat="yyyy-MM-dd HH:mm:ss";
 
 
         /**

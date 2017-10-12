@@ -1,27 +1,12 @@
-package com.ecovacs.test.common;
+package com.ecovacs.email.common;
 
-import com.google.common.collect.Maps;
-import com.sun.mail.imap.IMAPFolder;
-import com.sun.mail.imap.IMAPStore;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.Augmenter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Store;
-import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
 
 /**
  * Created by ecosqa on 16/12/6.
@@ -140,74 +125,6 @@ public class Common {
         logger.info("strFileName-" + strFileName);
         logger.info(ss.getPath() + "-- " + ss.getName());
         return screen.getScreenshotAs(OutputType.FILE).renameTo(ss);
-    }
-
-    private int getEmailIndex(Message message[]){
-        int iIndex = 0;
-        ReceiveMailUtil recMailUtil;
-        DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd HH:mm");
-        Date dateTimePre = null;
-        Date dateTimeCur;
-        try {
-            for (int i = 0; i < message.length; i++){
-                recMailUtil = new ReceiveMailUtil((MimeMessage)message[i]);
-                if(recMailUtil.getFrom().contains(PropertyData.getProperty("ecovacs_mail"))) {
-                    if (dateTimePre == null){
-                        dateTimePre = dateFormat.parse(recMailUtil.getSentDate());
-                        continue;
-                    }
-                    dateTimeCur = dateFormat.parse(recMailUtil.getSentDate());
-                    int iResult = dateTimeCur.compareTo(dateTimePre);
-                    if (iResult > 0){
-                        dateTimePre = dateTimeCur;
-                        iIndex = i;
-                    }
-                }
-            }
-        }catch (ParseException e){
-            e.printStackTrace();
-        }
-        return iIndex;
-    }
-
-    public String getEcovacsActiveUrl(String strImapHost, String strEmail, String strPassword){
-        String strUrl = null;
-        // Setup mail server
-        Properties properties = new Properties();
-        Session session = Session.getDefaultInstance(properties, null);
-        session.setDebug(true);
-        try {
-            /*Map idMap = new HashMap();
-            idMap.put("name", "xxx");
-            idMap.put("version", "7.26");
-            idMap.put("os", "windows");
-            idMap.put("os-version", "6.1");
-            idMap.put("vendor", "xxx");
-            idMap.put("contact", "xxx@xxx.com");
-
-            Store store = session.getStore("imaps");
-            IMAPStore imapStore = (IMAPStore) store;
-            Map res = imapStore.id(idMap);*/
-            Store store = session.getStore("imaps");
-            //Store store = session.getStore("pop3");
-            store.connect(strImapHost, strEmail, strPassword);
-            Folder folder = store.getFolder("INBOX");
-            folder.open(Folder.READ_ONLY);
-
-            Message message[] = folder.getMessages();
-            logger.info("Messages's length: " + message.length);
-            int iIndex = getEmailIndex(message);
-            ReceiveMailUtil recMailUtil = new ReceiveMailUtil((MimeMessage)message[iIndex]);
-            recMailUtil.getMailContent(message[iIndex]);
-            int iBegin = recMailUtil.getBodyText().indexOf("href=") + 6;
-            int iEnd = recMailUtil.getBodyText().indexOf("\"", recMailUtil.getBodyText().indexOf("href") + 6);
-            strUrl = recMailUtil.getBodyText().substring(iBegin, iEnd);
-            logger.info("Message " + message.length + " " + strUrl);
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return strUrl;
     }
 
 }
